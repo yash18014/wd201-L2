@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const minimist = require("minimist");
 
-var port = 3000;
+var port = 5000;
 const myArgs = minimist( process.argv.slice(2));
 if(myArgs.port != undefined)
     port = myArgs.port
