@@ -2,10 +2,9 @@ const http = require("http");
 const fs = require("fs");
 const minimist = require("minimist");
 
-var port1 = 5000;
 const myArgs = minimist( process.argv.slice(2));
 if(myArgs.port != undefined)
-    port1 = myArgs.port
+    port = myArgs.port
 
 const port = process.env.PORT || port1;
 
@@ -73,5 +72,8 @@ http.createServer((request, response) => {
             response.end();
             break;
     }
-})
-    .listen(port);
+});
+    // .listen(port);
+    server.listen(port, "127.0.0.1", () => {
+  console.log(`litening at port ${port}`);
+    });
