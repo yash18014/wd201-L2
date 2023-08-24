@@ -1,20 +1,20 @@
 const http = require("http");
 const fs = require("fs");
-const minimist = require("minimist");
-var port = 3000;
-const myArgs = process.argv[2] ?? port;
-console.log(process.argv[2]);
+const {port} = require("minimist")(process.argv.slice(2));
+// var port = 3000;
+// const myArgs = process.argv[2] ?? port;
+// console.log(process.argv[2]);
 
 
-port = process.env.PORT || myArgs;
+// port = process.env.PORT || myArgs;
 
-console.log(port);
+// console.log(port);
 
 let HomeContent = "";
 let RegistrationContent = "";
 let projectContent = "";
 let scriptContent = "";
-let styleContent = "";
+// let styleContent = "";
 fs.readFile("home.html", (err, home) => {
     if (err) {
         throw err;
