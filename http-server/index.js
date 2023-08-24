@@ -1,12 +1,12 @@
 const http = require("http");
 const fs = require("fs");
 const minimist = require("minimist");
-var port = 3000
-const myArgs = minimist( process.argv.slice(2));
-if(myArgs.port != undefined)
-    port = myArgs.port
+var port = 3000;
+const myArgs = process.argv[2] ?? port;
+console.log(process.argv[2]);
 
-port = process.env.PORT || port;
+
+port = process.env.PORT || myArgs;
 
 console.log(port);
 
@@ -39,13 +39,13 @@ fs.readFile("script.js", (err, script) => {
     }
     scriptContent = script;
 });
-fs.readFile("style.css", (err, style) => {
-    if (err) {
-        throw err;
-    }
-    styleContent = style;
-});
-http.createServer((request, response) => {
+// fs.readFile("style.css", (err, style) => {
+//     if (err) {
+//         throw err;
+//     }
+//     styleContent = style;
+// });
+const server = http.createServer((request, response) => {
     let url = request.url;
     response.writeHeader(200, { "content-type": "text/html" });
     switch (url) {
@@ -62,11 +62,11 @@ http.createServer((request, response) => {
             response.write(scriptContent);
             response.end();
             break;
-        case "/style":
-            response.writeHeader(200, { "content-type": "text/css" });
-            response.write(styleContent);
-            response.end();
-            break;
+        // case "/style":
+        //     response.writeHeader(200, { "content-type": "text/css" });
+        //     response.write(styleContent);
+        //     response.end();
+        //     break;
         default:
             response.write(HomeContent);
             response.end();
